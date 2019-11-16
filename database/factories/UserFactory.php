@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -29,3 +30,11 @@ $factory->define(User::class, function (Faker $faker) {
         'role' => $faker->randomElement(['patient', 'doctor'])
     ];
 });
+
+$factory->state(User::class, 'patient', [
+    'role' => 'patient'
+]);
+
+$factory->state(User::class, 'doctor', [
+    'role' => 'doctor'
+]);

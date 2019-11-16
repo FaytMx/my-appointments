@@ -40,3 +40,13 @@ Route::middleware(['auth', 'doctor'])->namespace('Doctor')->group(function () {
     Route::get('/schedule', 'ScheduleController@edit');
     Route::post('/schedule', 'ScheduleController@store');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/appointments/create', 'AppointmentController@create');
+    Route::post('/appointments', 'AppointmentController@store');
+    Route::get('/appointments', 'AppointmentController@index');
+});
+
+//JSON
+Route::get('/specialties/{specialty}/doctors', 'Api\SpecialtyController@doctors');
+Route::get('/schedule/hours', 'Api\ScheduleController@hours');
