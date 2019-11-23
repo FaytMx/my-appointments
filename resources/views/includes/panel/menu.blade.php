@@ -28,6 +28,11 @@
             <i class="ni ni-satisfied text-info"></i> Pacientes
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/appointments">
+            <i class="ni ni-time-alarm text-primary"></i>Citas médicas
+        </a>
+    </li>
     @elseif (auth()->user()->role == 'doctor')
     <li class="nav-item">
         <a class="nav-link" href="/schedule">
@@ -35,8 +40,8 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/patients">
-            <i class="ni ni-time-alarm text-primary"></i> Mis citas
+        <a class="nav-link" href="/appointments">
+            <i class="ni ni-time-alarm text-primary"></i> Citas médicas
         </a>
     </li>
     <li class="nav-item">
@@ -80,12 +85,12 @@
 <!-- Navigation -->
 <ul class="navbar-nav mb-md-3">
     <li class="nav-item">
-        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+        <a class="nav-link" href="{{url('/charts/appointments/line')}}">
             <i class="ni ni-palette text-yellow"></i> Frecuencia de citas
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
+        <a class="nav-link" href="{{url('/charts/doctors/column')}}">
             <i class="ni ni-spaceship text-red"></i> Médicos más activos
         </a>
     </li>

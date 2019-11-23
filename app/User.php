@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Appointment;
 
 class User extends Authenticatable
 {
@@ -51,5 +52,21 @@ class User extends Authenticatable
     public function specialties()
     {
         return $this->belongsToMany(Specialty::class)->withTimestamps();
+    }
+
+    public function attendedAppointments() {
+        return $this->asDoctorAppointments()->where('status', 'Atendida');
+    }
+
+    public function cancelledAppointments() {
+        return $this->asDoctorAppointments()->where('status', 'Cancelada');
+    }
+
+    public function asDoctorAppointments() {
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
+
+    public function asPatientAppointments() {
+        return $this->hasMany(Appointment::class, 'patient_id');
     }
 }

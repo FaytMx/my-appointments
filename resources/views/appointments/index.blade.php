@@ -9,11 +9,7 @@
             <div class="col">
                 <h3 class="mb-0">Citas</h3>
             </div>
-            <div class="col text-right">
-                <a href="{{url('patients/create')}}" class="btn btn-sm btn-success">
-                   Mis Citas
-                </a>
-            </div>
+
         </div>
     </div>
     <div class="card-body">
@@ -22,62 +18,35 @@
             <strong>Success!!</strong> {{session('notification')}}
         </div>
         @endif
-    </div>
-    <div class="table-responsive">
-        <!-- Projects table -->
-        <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Especialidad</th>
-                    <th scope="col">Médico</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($appointments as $appointment)
-                <tr>
-                    <th scope="row">
-                        {{$appointment->description}}
-                    </th>
-                    <td>
-                        {{$appointment->specialty->name}}
-                    </td>
-                    <td>
-                        {{$appointment->doctor->name}}
-                    </td>
-                    <td>
-                        {{$appointment->scheduled_date}}
-                    </td>
-                    <td>
-                        {{$appointment->scheduled_time_12}}
-                    </td>
-                    <td>
-                        {{$appointment->type}}
-                    </td>
 
-                    <td>
-                        {{$appointment->status}}
-                    </td>
-                    <td>
-                        <form action="{{url('/appointments/'.$appointment->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" title="Cancelar cita">Cancelar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="pill" href="#confirmed-appointments" role="tab"
+                    aria-controls="confirmed-appointments" aria-selected="true">Mis Próximas citas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#pending-appointments" role="tab"
+                    aria-controls="pending-appointments" aria-selected="false">Citas por confirmar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#old-appointments" role="tab"
+                    aria-controls="old-appointments" aria-selected="false">Historial de citas atendidas</a>
+            </li>
+        </ul>
+
     </div>
-    <div class="card-body">
-        {{$appointments->links()}}
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="confirmed-appointments" role="tabpanel">
+            @include('appointments.tables.confirmed')
+        </div>
+        <div class="tab-pane fade" id="pending-appointments" role="tabpanel">
+            @include('appointments.tables.pending')
+        </div>
+        <div class="tab-pane fade" id="old-appointments" role="tabpanel">
+            @include('appointments.tables.old')
+        </div>
     </div>
+
 </div>
 
 @endsection
