@@ -21,8 +21,8 @@ class CreateCancelledAppointmentsTable extends Migration
 
             $table->string('justification')->nullable();
 
-            $table->unsignedBigInteger('cancelled_by');
-            $table->foreign('cancelled_by')->references('id')->on('users');
+            $table->unsignedBigInteger('cancelled_by_id');
+            $table->foreign('cancelled_by_id')->references('id')->on('users');
 
             $table->timestamps();
         });
