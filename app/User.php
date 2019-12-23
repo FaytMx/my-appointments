@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Appointment;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -17,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'dni', 'address', 'phone', 'role'
+        'name', 'email', 'password', 'dni', 'address', 'phone', 'role',
     ];
 
     /**
@@ -26,7 +25,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'pivot'
+        'password', 'remember_token', 'pivot', 'email_verified_at',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -37,7 +38,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
 
     public function scopePatients($query)
     {
@@ -54,19 +54,23 @@ class User extends Authenticatable
         return $this->belongsToMany(Specialty::class)->withTimestamps();
     }
 
-    public function attendedAppointments() {
+    public function attendedAppointments()
+    {
         return $this->asDoctorAppointments()->where('status', 'Atendida');
     }
 
-    public function cancelledAppointments() {
+    public function cancelledAppointments()
+    {
         return $this->asDoctorAppointments()->where('status', 'Cancelada');
     }
 
-    public function asDoctorAppointments() {
+    public function asDoctorAppointments()
+    {
         return $this->hasMany(Appointment::class, 'doctor_id');
     }
 
-    public function asPatientAppointments() {
+    public function asPatientAppointments()
+    {
         return $this->hasMany(Appointment::class, 'patient_id');
     }
 }

@@ -10,7 +10,7 @@ $(function() {
 
     $specialty.change(() => {
         const specilatyId = $specialty.val();
-        const url = `/specialties/${specilatyId}/doctors`;
+        const url = `/api/specialties/${specilatyId}/doctors`;
         $.getJSON(url, onDoctorsLoaded);
     });
 
@@ -32,7 +32,7 @@ function onDoctorsLoaded(doctors) {
 function loadHours() {
     const selectedDate = $date.val();
     const doctorId = $doctor.val();
-    const url = `/schedule/hours?date=${selectedDate}&doctor_id=${doctorId}`;
+    const url = `/api/schedule/hours?date=${selectedDate}&doctor_id=${doctorId}`;
     $.getJSON(url, displayHours);
 }
 
