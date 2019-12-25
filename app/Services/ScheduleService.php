@@ -23,12 +23,20 @@ class ScheduleService implements ScheduleServiceInterface
             'morning_start', 'morning_end', 'afternoon_start', 'afternoon_end'
         ]);
 
-        if (!$workDays) {
-            return [];
-        }
+        // if (!$workDays) {
+        //     return [];
+        // }
 
-        $morningIntervals = $this->getIntervals($workDays->morning_start, $workDays->morning_end, $date, $doctorId);
-        $afternoonIntervals = $this->getIntervals($workDays->afternoon_start, $workDays->afternoon_end, $date, $doctorId);
+        // $morningIntervals = $this->getIntervals($workDays->morning_start, $workDays->morning_end, $date, $doctorId);
+        // $afternoonIntervals = $this->getIntervals($workDays->afternoon_start, $workDays->afternoon_end, $date, $doctorId);
+
+        if ($workDays) {
+            $morningIntervals = $this->getIntervals($workDays->morning_start, $workDays->morning_end, $date, $doctorId);
+            $afternoonIntervals = $this->getIntervals($workDays->afternoon_start, $workDays->afternoon_end, $date, $doctorId);
+        } else {
+            $morningIntervals = [];
+            $afternoonIntervals = [];
+        }
 
         $data = [];
         $data['morning'] = $morningIntervals;
@@ -47,7 +55,7 @@ class ScheduleService implements ScheduleServiceInterface
         while ($start < $end) {
             $interval = [];
             $interval['start'] = $start->format('g:i A');
-            $avalible = $this->isAvalibleInterval($date,$doctorId,$start);
+            $avalible = $this->isAvalibleInterval($date, $doctorId, $start);
             $start->addMinute(30);
             $interval['end'] = $start->format('g:i A');
 
