@@ -38,7 +38,7 @@ function loadHours() {
 
 function displayHours(data) {
     // console.log(data);
-    if (!data.morning && !data.afternoon) {
+    if (!data.morning && !data.afternoon || data.morning.length == 0 && data.afternoon.length == 0) {
         console.log(
             "No se encontraron horas disponibles para el medico en el dia seleccionado"
         );
