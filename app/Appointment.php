@@ -17,6 +17,15 @@ class Appointment extends Model
         'scheduled_time'
     ];
 
+    protected $hidden = [
+        'pecialty_id',
+        'doctor_id',
+        'scheduled_time'
+    ];
+
+    protected $appends = [
+        'scheduled_time_12'
+    ];
 
     public function specialty()
     {
