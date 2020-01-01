@@ -5,7 +5,7 @@
 use App\Http\Controllers\AppointmentController;
 
 Route::post('/login', 'AuthController@login');
-
+Route::post('/register', 'AuthController@register');
 //public resources
 Route::get('/specialties', 'SpecialtyController@index');
 Route::get('/specialties/{specialty}/doctors', 'SpecialtyController@doctors');
