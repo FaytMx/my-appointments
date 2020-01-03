@@ -5,7 +5,7 @@ namespace App\Http\Traits;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 
-trait ValidateAndCreatePatient() {
+trait ValidateAndCreatePatient {
     protected function validator(array $data)
     {
         return Validator::make($data, User::$rules);
