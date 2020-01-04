@@ -955,17 +955,17 @@ var OrdersChart = (function() {
 							}
 
 							content += '<span class="popover-body-value">' + yLabel + '</span>';
-							
+
 							return content;
 						}
 					}
 				}
 			},
 			data: {
-				labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'S{ab', 'Dom'],
 				datasets: [{
-					label: 'Sales',
-					data: [25, 20, 30, 22, 17, 29]
+					label: 'Citas médicas',
+					data: [25, 20, 30, 22, 17, 29, 2]
 				}]
 			}
 		});
