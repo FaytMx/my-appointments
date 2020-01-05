@@ -37,7 +37,8 @@ class User extends Authenticatable
         'password' => ['required', 'string', 'min:8', 'confirmed'],
     ];
 
-    public static function createPatient(array $data) {
+    public static function createPatient(array $data)
+    {
         return self::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -87,5 +88,21 @@ class User extends Authenticatable
     public function asPatientAppointments()
     {
         return $this->hasMany(Appointment::class, 'patient_id');
+    }
+
+    public function sendFCM($message)
+    {
+
+        return fcm()
+            ->to([
+                $this->device_token
+            ]) // $recipients must an array
+            ->priority('high')
+            ->timeToLive(0)
+            ->notification([
+                'title' => config('app.name'),
+                'body' => $message
+            ])
+            ->send();
     }
 }

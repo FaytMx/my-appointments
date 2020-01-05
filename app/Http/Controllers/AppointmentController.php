@@ -74,7 +74,7 @@ class AppointmentController extends Controller
 
         if ($created) {
             $notification = 'La cita se ha registrado correctamente';
-        }else{
+        } else {
             $notification = 'Ocurrio un problema al registrar la cita medica';
         }
 
@@ -101,7 +101,10 @@ class AppointmentController extends Controller
         }
 
         $appointment->status = 'Cancelada';
-        $appointment->save();
+        $saved = $appointment->save();
+
+        if ($saved)
+            $appointment->patient->sendFCM("Su cita ha sido cancelada");
 
         $notification = 'La cita se ha cancelado correctamente';
 
@@ -111,7 +114,11 @@ class AppointmentController extends Controller
     public function postCanfirm(Appointment $appointment)
     {
         $appointment->status = 'Confirmada';
-        $appointment->save();
+        $saved = $appointment->save();
+
+        if ($saved)
+            $appointment->patient->sendFCM("Su cita se ha confirmado");
+
 
         $notification = 'La cita se ha confirmado correctamente';
 
