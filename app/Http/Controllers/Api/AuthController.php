@@ -45,7 +45,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $this - validator($request->all())->validate();
+        $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
